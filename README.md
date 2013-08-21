@@ -42,9 +42,8 @@ To install GIT
 
 To get WebWol create a directory and clone the GIT
 ```bash
-   mkdir WebWol
-   cd WebWol
    git clone sudo apt-get install git-core
+   cd WebWol
 ```
 
 Now modify the config
