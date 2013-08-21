@@ -26,38 +26,38 @@ It uses Bootstrap as front-end framework and express with jade as template engin
 For Node see https://github.com/joyent/node/wiki/Installation
 
 For Posgres 
-   bash
+```bash
    apt-get install postgresql
    sudo -u postgres psql postgres
    \password postgres
-   
+```
 
 Now type your password(it will not be displayed!).
 Press Control + D to exit psql. 
 
 To install GIT
-   bash
+```bash
    sudo apt-get install git-core
+```
 
-
-To get the WebWol create a directory and clone the GIT
-   bash
+To get WebWol create a directory and clone the GIT
+```bash
    mkdir WebWol
    cd WebWol
    git clone sudo apt-get install git-core
-   
+```
 
 Now modify the config
-   bash
+```bash
    sudo nano config.json
-
+```
 Move the cursor to "postgrespass" and change and change it to your previous configured postgres Password.
 Type Control + O for saving the file and Control + X to exit nano.
 
 To start the WebWol Sserver
-   bash
+```bash
    node app.js
-   
+```
 You should see "Express server listening on port 4000". Open your Browser and type the URL "yourip:4000".
 Open the config page and add a machine.
 
