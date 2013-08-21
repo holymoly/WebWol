@@ -1,20 +1,20 @@
 extends layout
  
 block content
-  div.navbar.navbar-fixed-top
-    div.navbar-inner
-        div.container
-            a(data-toggle='collapse',data-target='.nav-collapse').btn.btn-navbar
-                span.icon-bar
-                span.icon-bar
-                span.icon-bar
-            a(href='#').brand #{title}
-            div.nav-collapse
-                ul.nav
-                    li.active
-                        a(href='/') Home
-                    li
-                        a(href='/config') Config
+  div.navbar.navbar-default.navbar-fixed-top
+    div.container
+      div.navbar-header
+        a(data-toggle='collapse', data-target='.navbar-collapse').btn.navbar-toggle
+          span.icon-bar
+          span.icon-bar
+          span.icon-bar
+        a(href='#').navbar-brand #{title}
+      div.navbar-collapse.collapse
+        ul.nav.navbar-nav
+          li.active
+            a(href='/') Home
+          li
+            a(href='/config') Config
   div.top
   div.container
     div.content
