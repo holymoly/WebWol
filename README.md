@@ -18,7 +18,7 @@ It uses Bootstrap as front-end framework and express with jade as template engin
 | jade        | 0.34.1  |
 | pg          | 2.3.1   |
 | wake_on_lan | 0.0.3   |
-| Bootstrap   | 2.3.2   |
+| Bootstrap   | 3.0   |
 | PostgresSQL | 9.1.9   |
 
 ## Installation
