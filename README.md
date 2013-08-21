@@ -50,7 +50,7 @@ Now modify the config
 ```bash
    sudo nano config.json
 ```
-Move the cursor to "postgrespass" and change and change it to your previous configured postgres Password.
+Move the cursor to "postgrespass" and change it to your previous configured postgres Password.
 Type Control + O for saving the file and Control + X to exit nano.
 
 To start the WebWol Sserver
