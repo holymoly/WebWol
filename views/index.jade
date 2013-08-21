@@ -1,0 +1,39 @@
+extends layout
+ 
+block content
+  div.navbar.navbar-fixed-top
+    div.navbar-inner
+        div.container
+            a(data-toggle='collapse',data-target='.nav-collapse').btn.btn-navbar
+                span.icon-bar
+                span.icon-bar
+                span.icon-bar
+            a(href='#').brand #{title}
+            div.nav-collapse
+                ul.nav
+                    li.active
+                        a(href='/') Home
+                    li
+                        a(href='/config') Config
+  div.top
+  div.container
+    div.content
+      table.table.table-striped
+        thead
+          tr
+            th PC
+            th IP
+            th MAC
+            th
+        tbody
+          - if (typeof(pclist) !== 'undefined')
+          - each pc in pclist
+            tr 
+              form(action="/",method="post")        
+                td(style="vertical-align:middle")= pc.Name
+                td(style="vertical-align:middle")= pc.IP
+                td(style="vertical-align:middle")= pc.Mac
+                  input(type="hidden", name="Mac", value=pc.Mac) Mac  
+                td
+                  input.btn(type="submit", value="Wake",class="btn-block")
+  div.footer

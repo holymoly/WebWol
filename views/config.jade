@@ -1,0 +1,51 @@
+extends layout
+ 
+block content
+ div.navbar.navbar-fixed-top
+    div.navbar-inner
+        div.container
+            a(data-toggle='collapse',data-target='.nav-collapse').btn.btn-navbar
+                span.icon-bar
+                span.icon-bar
+                span.icon-bar
+            a(href='#').brand #{title}
+            div.nav-collapse
+                ul.nav
+                    li
+                        a(href='/') Home
+                    li.active
+                        a(href='/config') Config
+  div.top
+  div.container
+    div.content
+      table.table.table-striped
+        thead
+          tr
+            th PC
+            th IP
+            th MAC
+            th
+        tbody
+          - if (typeof(pclist) !== 'undefined')
+          - each pc in pclist
+            tr  
+              form(action="/remove",method="post")       
+                td(style="vertical-align:middle")= pc.Name
+                  input(type="hidden", name="PcName", value=pc.Name) PcName
+                td(style="vertical-align:middle")= pc.IP
+                  input(type="hidden", name="Ip", value=pc.IP) Ip
+                td(style="vertical-align:middle")= pc.Mac 
+                  input(type="hidden", name="Mac", value=pc.Mac) Mac
+                td
+                   input.btn(type="submit", value="Remove",class="btn-block")
+          tr
+            form(action="/add",method="post")
+              td 
+                input(class="input-block-level", type="text", name="PcName", placeholder="PC Name", required) PcName
+              td
+                input(class="input-block-level", type="text", name="Ip", placeholder="127.0.0.1", required pattern="((^|\\.)((25[0-5])|(2[0-4]\\d)|(1\\d\\d)|([1-9]?\\d))){4}$") IP
+              td
+                input(class="input-block-level", type="text", name="Mac", placeholder="aa:aa:aa:aa:aa:aa", required pattern="^([0-9A-Fa-f]{2}[:-]){5}([0-9A-Fa-f]{2})$") Mac
+              td 
+                input.btn(type="submit", value="Add", class="btn-block")
+  div.footerdiv.row 
