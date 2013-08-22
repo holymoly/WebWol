@@ -3,30 +3,26 @@
  * Module dependencies.
  */
 
-//Modul for Webserver
+//Modules
 var express = require('express')
-  , pg = require('pg')	
-  , routes = require('./routes')
-  , user = require('./routes/user')
-  , db = require('./routes/db')
   , http = require('http')
+  , pg = require('pg')  
   , path = require('path')
-  , config =require('./config.json');
+  , routes = require('./routes')
+  , db = require('./routes/db')
+  , index = require('./routes/index')
+  , config = require('./routes/config')
+  , user = require('./routes/user')
+  , wol = require('./routes/wol')
+  , configFile =require('./config.json');
+
+// create database if not already exists
+db.createDb();
 
 var app = express();
 
-// create Database if not exists
-client = new pg.Client('postgres://' + config.User + ':' + config.Pass + '@' + config.DbIP + '/' + config.Database);
-client.connect();
-var query = client.query("CREATE TABLE IF NOT EXISTS " + config.Table + "(name char(20), ip char(15), mac char(17))");
-
-query.on('end', function() { 
-		client.end();
-});
-
-
 // all environments
-app.set('port', process.env.PORT || config.Port);
+app.set('port', process.env.PORT || configFile.Port);
 app.set('views', __dirname + '/views');
 app.set('view engine', 'jade');
 app.use(express.favicon(__dirname + '/public/images/wecker.ico'));
@@ -42,14 +38,30 @@ if ('development' == app.get('env')) {
 }
 
 // set routes
-app.get('/', db.list);
-app.get('/config', db.config);
-
-app.post('/remove', db.remove);
-app.post('/add', db.create);
-app.post('/', db.wol);
+app.get('/', index.list);
+app.get('/config', config.list);
+app.post('/remove', config.remove);
+app.post('/add', config.add);
 
 // start Server
-http.createServer(app).listen(app.get('port'), function(){
+var server = http.createServer(app).listen(app.get('port'), function(){
   console.log('Express server listening on port ' + app.get('port'));
 });
+
+var io = require('socket.io').listen(server);
+
+io.sockets.on('connection', function (socket) {
+  /*
+  socket.emit('news', { hello: 'world' });
+  
+  socket.on('my other event', function (data) {
+    console.log(data);
+  });
+  */
+
+  socket.on('print', function(data) {
+   wol.wol(data);
+  });
+})
+
+

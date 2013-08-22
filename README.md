@@ -14,12 +14,15 @@ It uses Bootstrap as front-end framework and express with jade as template engin
 |Name         |Version  |
 |-------------|---------|
 | node        | 0.10.13 |
+| PostgresSQL | 9.1.9   |
+| Bootstrap   | 3.0     |
+
+|Node Modules |Version  |
+|-------------|---------|
 | express     | 3.3.4   |
-| jade        | 0.34.1  |
+| jade        | 0.35    |
 | pg          | 2.3.1   |
 | wake_on_lan | 0.0.3   |
-| Bootstrap   | 3.0   |
-| PostgresSQL | 9.1.9   |
 
 ## Installation
 

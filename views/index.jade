@@ -35,5 +35,5 @@ block content
                 td(style="vertical-align:middle")= pc.Mac
                   input(type="hidden", name="Mac", value=pc.Mac) Mac  
                 td
-                  input.btn(type="submit", value="Wake",class="btn-block")
+                  input.btn(type="button", onclick="doPrint(\'" + pc.Mac + "\')", value="Wake",class="btn-block")
   div.footer

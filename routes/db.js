@@ -1,10 +1,15 @@
+
+/*
+ * Communication with postgres
+ */
+
 var pg = require('pg')
-  , wol = require('wake_on_lan')	
-  ,	db = require('./db')
+  , db = require('./db')
   , config = require('../config.json');
 
-// Get all DB entries and render the index.jade file
-exports.list = function(req, res){
+  
+// get list of machines and render page  
+exports.query = function(req, res, page){
 	client = new pg.Client('postgres://' + config.User + ':' + config.Pass + '@' + config.DbIP + '/' + config.Database );
 	client.connect();
 	var query = client.query('SELECT * FROM ' + config.Table)
@@ -18,31 +23,12 @@ exports.list = function(req, res){
 
 	query.on('end', function() { 
 		client.end();
-	  	res.render('index',{title: 'Wol', pclist: pclist});
-	});
-};
-
-// Get all DB entries and render the config.jade file
-exports.config = function(req,res){
-	client = new pg.Client('postgres://' + config.User + ':' + config.Pass + '@' + config.DbIP + '/' + config.Database);
-	client.connect();
-	var query = client.query('SELECT * FROM ' + config.Table)
-		, pclist = new Array();
-
-	query.on('row', function(row){
-		//pclist.push(row);
-		pclist.push({Name: row.name.replace(/\s+/g, ' '), IP: row.ip.replace(/\s+/g, ' '), Mac: row.mac.replace(/\s+/g, ' ')});
-		//console.log(row);
-	});
-
-	query.on('end', function() { 
-	  	client.end();
-	  	res.render('config',{title: 'Wol', pclist: pclist});
+	  	res.render(page.page,{title: 'Wol', pclist: pclist});
 	});
 };
 
 // add one entrie from the database and render config.jade again
-exports.create = function(req, res){
+exports.create = function(req, res, page){
 	console.log(req.body);
 	client = new pg.Client('postgres://' + config.User + ':' + config.Pass + '@' + config.DbIP + '/' + config.Database);
 	client.connect();
@@ -52,12 +38,12 @@ exports.create = function(req, res){
 
 	query.on('end', function() { 
 	  	client.end();
-	  	db.config(req,res);
+	  	db.query(req,res, page);
 	});
 };
 
 // remove one entrie from the database and render config.jade again
-exports.remove = function(req, res){
+exports.remove = function(req, res, page){
 	console.log(req.body);
 	client = new pg.Client('postgres://' + config.User + ':' + config.Pass + '@' + config.DbIP + '/' + config.Database);
 	client.connect();
@@ -67,21 +53,17 @@ exports.remove = function(req, res){
 
 	query.on('end', function() { 
 	  	client.end();
-	  	db.config(req,res);
+	  	db.query(req,res,page);
 	});
 };
 
-// Send WOL signal from index.jade
-exports.wol = function(req, res){
-	console.log(req.body);
-	//wol.wake(req.body.Mac);
-
-	wol.wake(req.body.Mac.replace(/\s+/g, ''), function(error) {
-  		if (error) {
-    		console.log('Error during WOL with Mac: ' + req.body.Mac);
-  		} else {
-    		console.log('WOL with Mac:' + req.body.Mac);
-  		}
-  		db.list(req,res);
+// create Database if not exists
+exports.createDb = function(){
+	client = new pg.Client('postgres://' + config.User + ':' + config.Pass + '@' + config.DbIP + '/' + config.Database);
+	client.connect();
+	var query = client.query("CREATE TABLE IF NOT EXISTS " + config.Table + "(name char(20), ip char(15), mac char(17))");
+	
+	query.on('end', function() { 
+			client.end();
 	});
 };
