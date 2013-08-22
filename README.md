@@ -40,9 +40,9 @@ To install GIT
    sudo apt-get install git-core
 ```
 
-To get WebWol create a directory and clone the GIT
+To get WebWol clone the repository
 ```bash
-   git clone sudo apt-get install git-core
+   git clone https://github.com/holymoly/WebWol
    cd WebWol
 ```
 
