@@ -23,6 +23,7 @@ It uses Bootstrap as front-end framework and express with jade as template engin
 | jade        | 0.35    |
 | pg          | 2.3.1   |
 | wake_on_lan | 0.0.3   |
+| socket.io   | 0.9.16  |
 
 ## Installation
 
