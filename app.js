@@ -6,14 +6,13 @@
 //Modules
 var express = require('express')
   , http = require('http')
-  , pg = require('pg')  
   , path = require('path')
   , routes = require('./routes')
   , db = require('./routes/db')
   , index = require('./routes/index')
   , config = require('./routes/config')
   , user = require('./routes/user')
-  , wol = require('./routes/wol')
+  , socketEventsListers = require('./routes/socket')
   , configFile =require('./config.json');
 
 // create database if not already exists
@@ -49,19 +48,13 @@ var server = http.createServer(app).listen(app.get('port'), function(){
 });
 
 var io = require('socket.io').listen(server);
+//io.set('log level', 1); // reduce logging
 
+// Creating listeners and events on client socket connection
 io.sockets.on('connection', function (socket) {
-  /*
-  socket.emit('news', { hello: 'world' });
-  
-  socket.on('my other event', function (data) {
-    console.log(data);
-  });
-  */
+  // Add listener for wol event
+  socketEventsListers.wol(socket); 
+  socketEventsListers.scan(socket);
+  socketEventsListers.updateScan(socket);
 
-  socket.on('print', function(data) {
-   wol.wol(data);
-  });
-})
-
-
+});

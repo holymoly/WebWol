@@ -35,5 +35,12 @@ block content
                 td(style="vertical-align:middle")= pc.Mac
                   input(type="hidden", name="Mac", value=pc.Mac) Mac  
                 td
-                  input.btn(type="button", onclick="doPrint(\'" + pc.Mac + "\')", value="Wake",class="btn-block")
+                  input.btn(id=pc.IP, type="button", onclick="doWol(\'" + pc.Mac + "\')", value="Wake",class="btn-block")
+          tr
+            td
+            td
+            td
+            td
+              input.btn(type="button", onclick="updateScan()", value="Update",class="btn-block")
+          
   div.footer

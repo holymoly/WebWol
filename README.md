@@ -11,20 +11,20 @@ It uses Bootstrap as front-end framework and express with jade as template engin
 
 ##Used stuff
 
-|Name         |Version  |
-|-------------|---------|
-| node        | 0.10.13 |
-| PostgresSQL | 9.1.9   |
-| Bootstrap   | 3.0     |
+|Name          |Version  |
+|--------------|---------|
+| node         | 0.10.13 |
+| PostgresSQL  | 9.1.9   |
+| Bootstrap    | 3.0     |
 
-|Node Modules |Version  |
-|-------------|---------|
-| express     | 3.3.4   |
-| jade        | 0.35    |
-| pg          | 2.3.1   |
-| wake_on_lan | 0.0.3   |
-| socket.io   | 0.9.16  |
-
+|Node Modules  |Version  |
+|--------------|---------|
+| express      | 3.3.4   |
+| jade         | 0.35    |
+| pg           | 2.3.1   |
+| wake_on_lan  | 0.0.3   |
+| socket.io    | 0.9.16  |
+| node-net-ping| 1.1.9   |
 ## Installation
 
 For Node see https://github.com/joyent/node/wiki/Installation

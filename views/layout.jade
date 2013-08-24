@@ -3,7 +3,6 @@ html
   head
     title= title
     link(rel='stylesheet', href='/bootstrap/css/bootstrap.min.css')
-    link(rel='stylesheet', href='/bootstrap/css/bootstrap-responsive.min.css')
     link(rel='stylesheet', href='/stylesheets/style.css')
     script(src='http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js')
     script(src='/bootstrap/js/bootstrap.min.js')
@@ -11,16 +10,32 @@ html
     script(src='/socket.io/socket.io.js')
     script.
       var socket = io.connect();
-      
-      /*
-      socket.on('news', function (data) {
-        console.log(data);
-        socket.emit('my other event', { my: 'data' });
-      });    
-      */
 
-      function doPrint(data){
-        socket.emit('print', {mac: data});
+      // Update the Column Backgroundcolour if ping was succesful
+      socket.on('updateResult', function (data) {
+        console.log(data.client + ':' + data.data);
+        if(document.getElementById(data.client)){
+          if(data.data == 'failed'){
+            document.getElementById(data.client).style.backgroundColor = "#adadad";
+            document.getElementById(data.client).disabled = false;
+            document.getElementById(data.client).value="Wake";
+            }
+          else{
+            document.getElementById(data.client).style.backgroundColor = "#00cc00";
+            document.getElementById(data.client).disabled = true; 
+            document.getElementById(data.client).value="Active";
+            //document.getElementById(data.client).addClass('activePC');
+          }
+        }
+      });
+
+      // Triggers the Wol on the werver
+      function doWol(data){
+        socket.emit('wol', {mac: data});
+      };
+
+      function updateScan(){
+        socket.emit('updateScan');
       };
 
   body
