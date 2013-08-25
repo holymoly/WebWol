@@ -1,11 +1,11 @@
 # WebWol
 
 
-A Node based wake on lan webserver
+A Nodejs based wake on lan webserver
 
 ## What is it?
 
-WebWol is a project that I use to learn Node. 
+WebWol is a project that I use to learn Node. Is currently running on a raspberry pi with weezy.
 You can simply add or delete a machine that you want to wake up from a config page. The list of machines is stored in a postgres database ( i know, i know... just wanted to see how to connect/read/write to a database). If the database doesnt exist it will be created when the webserver is started.
 It uses Bootstrap as front-end framework and express with jade as template engine.
 
@@ -59,8 +59,8 @@ Type Control + O for saving the file and Control + X to exit nano.
 
 To start the WebWol Sserver
 ```bash
-   node app.js
+   sudo node app.js
 ```
-You should see "Express server listening on port 4000". Open your Browser and type the URL "yourip:4000".
+Sudo is needed since node-net-ping was added for scanning. You should see "Express server listening on port 4000". Open your Browser and type the URL "yourip:4000".
 Open the config page and add a machine.
 
