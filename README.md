@@ -48,6 +48,7 @@ To get WebWol clone the repository
 ```bash
    git clone https://github.com/holymoly/WebWol
    cd WebWol
+   npm install
 ```
 
 Now modify the config
