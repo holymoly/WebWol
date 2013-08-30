@@ -56,5 +56,15 @@ io.sockets.on('connection', function (socket) {
   socketEventsListers.wol(socket); 
   socketEventsListers.scan(socket);
   socketEventsListers.updateScan(socket);
-
+  socketEventsListers.searchPc(socket,'192.168.123');
+  /*
+  arp.getMac('192.168.123.1', function(err, mac){
+    if (err){
+      console.log(err);
+    }
+    else{
+      console.log(mac);
+    }
+  });
+  */
 });

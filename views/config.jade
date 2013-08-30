@@ -8,7 +8,7 @@ block content
           span.icon-bar
           span.icon-bar
           span.icon-bar
-        a(href='#').navbar-brand #{title}
+        a(href='/').navbar-brand #{title}
       div.navbar-collapse.collapse
         ul.nav.navbar-nav
           li
@@ -36,16 +36,25 @@ block content
                   input(type="hidden", name="Ip", value=pc.IP) Ip
                 td(style="vertical-align:middle")= pc.Mac 
                   input(type="hidden", name="Mac", value=pc.Mac) Mac
-                td
-                   input.btn(type="submit", value="Remove",class="btn-block")
+                td(style="vertical-align:middle")
+                  input.btn(type="submit", value="Remove",class="btn-block")
           tr
             form(action="/add",method="post")
-              td 
-                input(class="input-block-level", type="text", name="PcName", placeholder="PC Name", required) PcName
+              td(style="vertical-align:middle")
+                input(type="text", name="PcName", placeholder="PC Name", required) PcName
+              td(style="vertical-align:middle")
+                input(id="textIp", type="text", name="Ip", placeholder="127.0.0.1", required pattern="((^|\\.)((25[0-5])|(2[0-4]\\d)|(1\\d\\d)|([1-9]?\\d))){4}$") IP
+              td(style="vertical-align:middle")
+                input(id="textMac", type="text", name="Mac", placeholder="aa:aa:aa:aa:aa:aa", required pattern="^([0-9A-Fa-f]{2}[:-]){5}([0-9A-Fa-f]{2})$") Mac
+              td(style="vertical-align:middle")
+                input.btn.btn-block(type="submit", value="Add")
+            tr        
               td
-                input(class="input-block-level", type="text", name="Ip", placeholder="127.0.0.1", required pattern="((^|\\.)((25[0-5])|(2[0-4]\\d)|(1\\d\\d)|([1-9]?\\d))){4}$") IP
               td
-                input(class="input-block-level", type="text", name="Mac", placeholder="aa:aa:aa:aa:aa:aa", required pattern="^([0-9A-Fa-f]{2}[:-]){5}([0-9A-Fa-f]{2})$") Mac
-              td 
-                input.btn(type="submit", value="Add", class="btn-block")
-  div.footerdiv.row 
+              td
+              td(style="vertical-align:middle")
+                .btn-group.btn-block
+                  button.btn.btn-block.dropdown-toggle(data-toggle='dropdown') Available
+                      span.caret
+                    ul.dropdown-menu(role='menu', id="foundedPcs")  
+  div.footer
